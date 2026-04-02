@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">JD</div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <nav class="sidebar" id="sidebar">
+    <a href="user-dashboard.html" class="nav-link active">🏠 Dashboard</a>
+    <a href="lost-found-gallery.html" class="nav-link">🔍 Lost &amp; Found Gallery</a>
+    <a href="activity-history.html" class="nav-link">📋 Activity History</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Main -->
+  <main class="main" id="main">
+    <div class="page-title">Dashboard</div>
+    <div class="page-subtitle">Hello, Juan! What would you like to do today?</div>
+
+    <div class="grid-2" style="max-width:600px;">
+      <a href="report-facility.html" class="choice-card" style="text-decoration:none; color:inherit;">
+        <div class="choice-icon">🔧</div>
+        <div class="choice-title">Report a Facility Issue</div>
+        <div class="choice-desc">Submit a report for broken equipment, rooms, or other campus facility problems.</div>
+        <button class="btn btn-primary btn-sm" style="margin-top:8px;">Go</button>
+      </a>
+      <a href="report-found-item.html" class="choice-card" style="text-decoration:none; color:inherit;">
+        <div class="choice-icon">📦</div>
+        <div class="choice-title">Report Found Item</div>
+        <div class="choice-desc">Found something on campus? Let security know so the owner can claim it.</div>
+        <button class="btn btn-primary btn-sm" style="margin-top:8px;">Go</button>
+      </a>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Security Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">SA</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="security-dashboard.html" class="nav-link active">🏠 Dashboard</a>
+    <a href="security-pending-posts.html" class="nav-link">⏳ Pending Posts</a>
+    <a href="security-gallery.html" class="nav-link">🖼 Found Item Gallery</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Security Admin Dashboard</div>
+    <div class="page-subtitle">Manage lost &amp; found submissions from students.</div>
+
+    <div class="grid-3" style="margin-bottom:28px;">
+      <div class="stat-card">
+        <div class="stat-value">6</div>
+        <div class="stat-label">Pending Posts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">18</div>
+        <div class="stat-label">Approved Items</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">4</div>
+        <div class="stat-label">Claimed This Month</div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="max-width:600px;">
+      <a href="security-pending-posts.html" class="choice-card" style="text-decoration:none; color:inherit;">
+        <div class="choice-icon">⏳</div>
+        <div class="choice-title">Review Pending Posts</div>
+        <div class="choice-desc">Approve or reject student-submitted found item reports.</div>
+        <button class="btn btn-primary btn-sm" style="margin-top:8px;">Go</button>
+      </a>
+      <a href="security-gallery.html" class="choice-card" style="text-decoration:none; color:inherit;">
+        <div class="choice-icon">🖼</div>
+        <div class="choice-title">Found Item Gallery</div>
+        <div class="choice-desc">View all approved items, mark as claimed, or delete posts.</div>
+        <button class="btn btn-primary btn-sm" style="margin-top:8px;">Go</button>
+      </a>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>

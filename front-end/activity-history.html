@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Activity History</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">JD</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="user-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="lost-found-gallery.html" class="nav-link">🔍 Lost &amp; Found Gallery</a>
+    <a href="activity-history.html" class="nav-link active">📋 Activity History</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Activity History</div>
+    <div class="page-subtitle">All your submitted reports — facility issues and lost &amp; found items.</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>Title / Item</th>
+            <th>Location</th>
+            <th>Date Submitted</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>Facility Issue</td>
+            <td>Broken AC Unit</td>
+            <td>Room 201, Bldg A</td>
+            <td>Mar 28, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>Lost &amp; Found</td>
+            <td>Black Umbrella</td>
+            <td>Near Library</td>
+            <td>Mar 25, 2026</td>
+            <td><span class="badge badge-approved">Approved</span></td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>Facility Issue</td>
+            <td>Projector Not Working</td>
+            <td>Room 302, Bldg B</td>
+            <td>Mar 20, 2026</td>
+            <td><span class="badge badge-resolved">Resolved</span></td>
+          </tr>
+          <tr>
+            <td>004</td>
+            <td>Lost &amp; Found</td>
+            <td>Blue Water Bottle</td>
+            <td>Canteen Area</td>
+            <td>Mar 18, 2026</td>
+            <td><span class="badge badge-rejected">Rejected</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>

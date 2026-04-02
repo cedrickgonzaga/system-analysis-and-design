@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Facility Tickets</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">FA</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="facility-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="facility-tickets.html" class="nav-link active">🎫 Tickets</a>
+    <a href="facility-generate-summary.html" class="nav-link">📄 Generate Summary</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Facility Tickets</div>
+    <div class="page-subtitle">All facility-related issue tickets assigned to Facility Admin.</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticket #</th>
+            <th>Submitted By</th>
+            <th>Issue</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Change Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#F-021</td>
+            <td>J. Santos</td>
+            <td>Broken window</td>
+            <td>Room 301</td>
+            <td>Apr 1, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending" selected>Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>#F-020</td>
+            <td>M. Cruz</td>
+            <td>Ceiling fan not working</td>
+            <td>Faculty Room</td>
+            <td>Mar 31, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending" selected>Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>#F-019</td>
+            <td>R. Garcia</td>
+            <td>Leaking roof</td>
+            <td>Room 204</td>
+            <td>Mar 29, 2026</td>
+            <td><span class="badge badge-resolved">Resolved</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending">Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved" selected>Resolved</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>#F-018</td>
+            <td>K. Flores</td>
+            <td>Door hinge broken</td>
+            <td>CR, Ground Floor</td>
+            <td>Mar 27, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending" selected>Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>
+

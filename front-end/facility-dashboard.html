@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Facility Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">FA</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="facility-dashboard.html" class="nav-link active">🏠 Dashboard</a>
+    <a href="facility-tickets.html" class="nav-link">🎫 Tickets</a>
+    <a href="facility-generate-summary.html" class="nav-link">📄 Generate Summary</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Facility Admin Dashboard</div>
+    <div class="page-subtitle">Overview of facility-related issue tickets assigned to you.</div>
+
+    <div class="grid-3" style="margin-bottom:28px;">
+      <div class="stat-card">
+        <div class="stat-value">9</div>
+        <div class="stat-label">Open Tickets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">3</div>
+        <div class="stat-label">In Progress</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">24</div>
+        <div class="stat-label">Resolved This Month</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h3>Recent Tickets</h3>
+      <a href="facility-tickets.html" class="btn btn-secondary btn-sm">View All</a>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticket #</th>
+            <th>Issue</th>
+            <th>Location</th>
+            <th>Submitted</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#F-021</td>
+            <td>Broken window</td>
+            <td>Room 301</td>
+            <td>Apr 1, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>#F-020</td>
+            <td>Ceiling fan not working</td>
+            <td>Faculty Room</td>
+            <td>Mar 31, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>#F-019</td>
+            <td>Leaking roof</td>
+            <td>Room 204</td>
+            <td>Mar 29, 2026</td>
+            <td><span class="badge badge-resolved">Resolved</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>

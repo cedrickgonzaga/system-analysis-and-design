@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Report Facility Issue</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">JD</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="user-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="lost-found-gallery.html" class="nav-link">🔍 Lost &amp; Found Gallery</a>
+    <a href="activity-history.html" class="nav-link">📋 Activity History</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Report a Facility Issue</div>
+    <div class="page-subtitle">Fill in the details below. Your report will be routed to the right admin.</div>
+
+    <div class="card" style="max-width:520px;">
+      <div class="form-group">
+        <label for="category">Issue Category</label>
+        <select class="form-control" id="category">
+          <option value="" disabled selected>Select category</option>
+          <option value="computer">Computer (IT Issue)</option>
+          <option value="facility">Facility (Room/Equipment)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="issue-name">Issue Name / Title</label>
+        <input class="form-control" type="text" id="issue-name" placeholder="e.g. Projector not working"/>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location</label>
+        <input class="form-control" type="text" id="location" placeholder="e.g. Room 302, Building B"/>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description (optional)</label>
+        <textarea class="form-control" id="description" rows="4" placeholder="Describe the issue in more detail..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="attachment">Attach Image (optional, max 10MB)</label>
+        <input class="form-control" type="file" id="attachment" accept="image/*"
+          style="padding:8px 14px; cursor:pointer;"
+          onchange="
+            const f = this.files[0];
+            const err = document.getElementById('file-error');
+            if (f && f.size > 10 * 1024 * 1024) {
+              err.style.display = 'block';
+              this.value = '';
+            } else {
+              err.style.display = 'none';
+            }
+          "/>
+        <span id="file-error" style="display:none; color:var(--danger); font-size:0.8rem; margin-top:4px;">
+          File exceeds 10MB limit. Please choose a smaller image.
+        </span>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn btn-primary">Submit Report</button>
+        <a href="user-dashboard.html" class="btn btn-secondary">Cancel</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>
+

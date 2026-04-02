@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — IT Tickets</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">IT</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="it-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="it-tickets.html" class="nav-link active">🎫 Tickets</a>
+    <a href="it-generate-summary.html" class="nav-link">📄 Generate Summary</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">IT Tickets</div>
+    <div class="page-subtitle">All computer-related issue tickets assigned to IT Admin.</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticket #</th>
+            <th>Submitted By</th>
+            <th>Issue</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Change Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#T-041</td>
+            <td>J. Santos</td>
+            <td>PC won't boot</td>
+            <td>Computer Lab 1</td>
+            <td>Apr 1, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending" selected>Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>#T-040</td>
+            <td>M. Cruz</td>
+            <td>No internet connection</td>
+            <td>Library PC Area</td>
+            <td>Mar 31, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending" selected>Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>#T-039</td>
+            <td>R. Reyes</td>
+            <td>Mouse not working</td>
+            <td>Room 105</td>
+            <td>Mar 30, 2026</td>
+            <td><span class="badge badge-resolved">Resolved</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending">Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved" selected>Resolved</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>#T-038</td>
+            <td>A. Lim</td>
+            <td>Keyboard broken</td>
+            <td>Computer Lab 2</td>
+            <td>Mar 29, 2026</td>
+            <td><span class="badge badge-resolved">Resolved</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending">Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved" selected>Resolved</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>#T-037</td>
+            <td>B. Torres</td>
+            <td>Monitor has dead pixels</td>
+            <td>Room 202</td>
+            <td>Mar 28, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+            <td>
+              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;" onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
+                <option value="pending" selected>Pending</option>
+                <option value="approved">In Progress</option>
+                <option value="resolved">Resolved</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Report Found Item</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">JD</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="user-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="lost-found-gallery.html" class="nav-link">🔍 Lost &amp; Found Gallery</a>
+    <a href="activity-history.html" class="nav-link">📋 Activity History</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Report a Found Item</div>
+    <div class="page-subtitle">Found something on campus? Submit the details so the owner can claim it.</div>
+
+    <div class="card" style="max-width:520px;">
+      <div class="form-group">
+        <label for="item-name">Item Name</label>
+        <input class="form-control" type="text" id="item-name" placeholder="e.g. Black backpack"/>
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location Found</label>
+        <input class="form-control" type="text" id="location" placeholder="e.g. Near the canteen, Building A"/>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Item Category</label>
+        <select class="form-control" id="category">
+          <option value="" disabled selected>Select category</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing &amp; Accessories</option>
+          <option value="school-supplies">School Supplies</option>
+          <option value="personal">Personal Item</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description (optional)</label>
+        <textarea class="form-control" id="description" rows="4" placeholder="Any identifiable details about the item..."></textarea>
+      </div>
+
+      <div style="display:flex; gap:10px; margin-top:8px;">
+        <button class="btn btn-primary">Submit</button>
+        <a href="user-dashboard.html" class="btn btn-secondary">Cancel</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>

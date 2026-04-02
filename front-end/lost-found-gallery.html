@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Lost &amp; Found Gallery</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">JD</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="user-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="lost-found-gallery.html" class="nav-link active">🔍 Lost &amp; Found Gallery</a>
+    <a href="activity-history.html" class="nav-link">📋 Activity History</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Lost &amp; Found Gallery</div>
+    <div class="page-subtitle">Browse approved found items. Is one of these yours?</div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
+          <span style="font-size:2.5rem;">🎒</span>
+          <span style="font-size:0.7rem;">No image uploaded</span>
+        </div>
+        <div class="gallery-info">
+          <h4>Black Backpack</h4>
+          <p>📍 Near Canteen</p>
+          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Apr 1, 2026 — 10:32 AM</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
+          <span style="font-size:2.5rem;">☂️</span>
+          <span style="font-size:0.7rem;">No image uploaded</span>
+        </div>
+        <div class="gallery-info">
+          <h4>Blue Umbrella</h4>
+          <p>📍 Library Entrance</p>
+          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 31, 2026 — 2:15 PM</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
+          <span style="font-size:2.5rem;">📱</span>
+          <span style="font-size:0.7rem;">No image uploaded</span>
+        </div>
+        <div class="gallery-info">
+          <h4>Android Phone</h4>
+          <p>📍 Room 101, Bldg A</p>
+          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 31, 2026 — 9:05 AM</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
+          <span style="font-size:2.5rem;">🔑</span>
+          <span style="font-size:0.7rem;">No image uploaded</span>
+        </div>
+        <div class="gallery-info">
+          <h4>Key with Keychain</h4>
+          <p>📍 Hallway, 2nd Floor</p>
+          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 30, 2026 — 3:48 PM</p>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
+          <span style="font-size:2.5rem;">📓</span>
+          <span style="font-size:0.7rem;">No image uploaded</span>
+        </div>
+        <div class="gallery-info">
+          <h4>Notebook</h4>
+          <p>📍 Classroom 205</p>
+          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 30, 2026 — 11:20 AM</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>
+

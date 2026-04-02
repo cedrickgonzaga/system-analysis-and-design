@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — Pending Posts</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">SA</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="security-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="security-pending-posts.html" class="nav-link active">⏳ Pending Posts</a>
+    <a href="security-gallery.html" class="nav-link">🖼 Found Item Gallery</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">Pending Posts</div>
+    <div class="page-subtitle">Review student-submitted found item reports. Approve or reject each one.</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Submitted By</th>
+            <th>Item Name</th>
+            <th>Category</th>
+            <th>Location Found</th>
+            <th>Date Submitted</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>001</td>
+            <td>J. Santos</td>
+            <td>Black Backpack</td>
+            <td>Personal Item</td>
+            <td>Near Canteen</td>
+            <td>Apr 1, 2026</td>
+            <td style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-success btn-sm">Approve</button>
+              <button class="btn btn-danger btn-sm">Reject</button>
+            </td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>M. Reyes</td>
+            <td>Android Phone</td>
+            <td>Electronics</td>
+            <td>Room 101, Bldg A</td>
+            <td>Apr 1, 2026</td>
+            <td style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-success btn-sm">Approve</button>
+              <button class="btn btn-danger btn-sm">Reject</button>
+            </td>
+          </tr>
+          <tr>
+            <td>003</td>
+            <td>A. Cruz</td>
+            <td>Blue Umbrella</td>
+            <td>Personal Item</td>
+            <td>Library Entrance</td>
+            <td>Mar 31, 2026</td>
+            <td style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-success btn-sm">Approve</button>
+              <button class="btn btn-danger btn-sm">Reject</button>
+            </td>
+          </tr>
+          <tr>
+            <td>004</td>
+            <td>B. Lim</td>
+            <td>Notebook</td>
+            <td>School Supplies</td>
+            <td>Classroom 205</td>
+            <td>Mar 31, 2026</td>
+            <td style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-success btn-sm">Approve</button>
+              <button class="btn btn-danger btn-sm">Reject</button>
+            </td>
+          </tr>
+          <tr>
+            <td>005</td>
+            <td>C. Torres</td>
+            <td>Key with Keychain</td>
+            <td>Personal Item</td>
+            <td>Hallway, 2nd Floor</td>
+            <td>Mar 30, 2026</td>
+            <td style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-success btn-sm">Approve</button>
+              <button class="btn btn-danger btn-sm">Reject</button>
+            </td>
+          </tr>
+          <tr>
+            <td>006</td>
+            <td>D. Flores</td>
+            <td>Jacket</td>
+            <td>Clothing &amp; Accessories</td>
+            <td>Gymnasium Exit</td>
+            <td>Mar 30, 2026</td>
+            <td style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn btn-success btn-sm">Approve</button>
+              <button class="btn btn-danger btn-sm">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>

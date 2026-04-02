@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FindFix — IT Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+      <span class="header-title">FindFix</span>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
+      <div class="profile-icon">IT</div>
+    </div>
+  </header>
+
+  <nav class="sidebar" id="sidebar">
+    <a href="it-dashboard.html" class="nav-link active">🏠 Dashboard</a>
+    <a href="it-tickets.html" class="nav-link">🎫 Tickets</a>
+    <a href="it-generate-summary.html" class="nav-link">📄 Generate Summary</a>
+    <div class="sidebar-bottom">
+      <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main class="main" id="main">
+    <div class="page-title">IT Admin Dashboard</div>
+    <div class="page-subtitle">Overview of computer-related facility tickets assigned to you.</div>
+
+    <div class="grid-3" style="margin-bottom:28px;">
+      <div class="stat-card">
+        <div class="stat-value">12</div>
+        <div class="stat-label">Open Tickets</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">5</div>
+        <div class="stat-label">In Progress</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">38</div>
+        <div class="stat-label">Resolved This Month</div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <h3>Recent Tickets</h3>
+      <a href="it-tickets.html" class="btn btn-secondary btn-sm">View All</a>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Ticket #</th>
+            <th>Issue</th>
+            <th>Location</th>
+            <th>Submitted</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#T-041</td>
+            <td>PC won't boot</td>
+            <td>Computer Lab 1</td>
+            <td>Apr 1, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>#T-040</td>
+            <td>No internet connection</td>
+            <td>Library PC Area</td>
+            <td>Mar 31, 2026</td>
+            <td><span class="badge badge-pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>#T-039</td>
+            <td>Mouse not working</td>
+            <td>Room 105</td>
+            <td>Mar 30, 2026</td>
+            <td><span class="badge badge-resolved">Resolved</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+</body>
+</html>
