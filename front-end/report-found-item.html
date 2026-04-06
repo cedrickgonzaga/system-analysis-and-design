@@ -60,6 +60,24 @@
         <label for="description">Description (optional)</label>
         <textarea class="form-control" id="description" rows="4" placeholder="Any identifiable details about the item..."></textarea>
       </div>
+      <div class="form-group">
+        <label for="attachment">Attach Image (optional, max 10MB)</label>
+        <input class="form-control" type="file" id="attachment" accept="image/*"
+          style="padding:8px 14px; cursor:pointer;"
+          onchange="
+            const f = this.files[0];
+            const err = document.getElementById('file-error');
+            if (f && f.size > 10 * 1024 * 1024) {
+              err.style.display = 'block';
+              this.value = '';
+            } else {
+              err.style.display = 'none';
+            }
+          "/>
+        <span id="file-error" style="display:none; color:var(--danger); font-size:0.8rem; margin-top:4px;">
+          File exceeds 10MB limit. Please choose a smaller image.
+        </span>
+      </div>
 
       <div style="display:flex; gap:10px; margin-top:8px;">
         <button class="btn btn-primary">Submit</button>
