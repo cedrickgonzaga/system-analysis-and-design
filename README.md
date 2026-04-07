@@ -1,6 +1,6 @@
 # FindFix
 
-# UI / Wirefram - Figma
+# UI / Wireframe - Figma
 - https://www.figma.com/design/KeeeR7IcdlTSvkEX2uNEVs/FindFix-UI?m=auto&t=zk8UF29KH5gbxmEv-1
 
 # Diagrams - Miro
