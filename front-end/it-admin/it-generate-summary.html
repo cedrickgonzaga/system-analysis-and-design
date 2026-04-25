@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FindFix — Facility Generate Summary</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindFix — IT Generate Summary</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <header class="header">
@@ -15,14 +17,14 @@
     </div>
     <div class="header-right">
       <button class="theme-toggle" id="themeToggle">☀ / ☾</button>
-      <div class="profile-icon">FA</div>
+      <div class="profile-icon">IT</div>
     </div>
   </header>
 
   <nav class="sidebar" id="sidebar">
-    <a href="facility-dashboard.html" class="nav-link">🏠 Dashboard</a>
-    <a href="facility-tickets.html" class="nav-link">🎫 Tickets</a>
-    <a href="facility-generate-summary.html" class="nav-link active">📄 Generate Summary</a>
+    <a href="it-dashboard.html" class="nav-link">🏠 Dashboard</a>
+    <a href="it-tickets.html" class="nav-link">🎫 Tickets</a>
+    <a href="it-generate-summary.html" class="nav-link active">📄 Generate Summary</a>
     <div class="sidebar-bottom">
       <a href="login.html" class="btn btn-secondary btn-sm btn-full">Logout</a>
     </div>
@@ -32,7 +34,7 @@
 
   <main class="main" id="main">
     <div class="page-title">Generate Summary</div>
-    <div class="page-subtitle">Select a month to generate a printable summary of resolved facility tickets.</div>
+    <div class="page-subtitle">Select a month to generate a printable summary of resolved IT tickets.</div>
 
     <div class="card" style="max-width:420px; margin-bottom:24px;">
       <div class="form-group">
@@ -48,6 +50,7 @@
       <button class="btn btn-primary">Generate &amp; Print</button>
     </div>
 
+    <!-- Preview Table -->
     <div class="section-head">
       <h3>Preview — March 2026 (Resolved Tickets)</h3>
     </div>
@@ -64,31 +67,32 @@
         </thead>
         <tbody>
           <tr>
-            <td>#F-019</td>
-            <td>Leaking roof</td>
-            <td>Room 204</td>
-            <td>R. Garcia</td>
+            <td>#T-039</td>
+            <td>Mouse not working</td>
+            <td>Room 105</td>
+            <td>R. Reyes</td>
             <td>Mar 30, 2026</td>
           </tr>
           <tr>
-            <td>#F-015</td>
-            <td>Broken bench</td>
-            <td>Lobby Area</td>
-            <td>T. Villanueva</td>
-            <td>Mar 22, 2026</td>
+            <td>#T-038</td>
+            <td>Keyboard broken</td>
+            <td>Computer Lab 2</td>
+            <td>A. Lim</td>
+            <td>Mar 29, 2026</td>
           </tr>
           <tr>
-            <td>#F-012</td>
-            <td>Damaged whiteboard</td>
-            <td>Room 108</td>
-            <td>S. Aquino</td>
-            <td>Mar 18, 2026</td>
+            <td>#T-035</td>
+            <td>Slow PC performance</td>
+            <td>Library PC Area</td>
+            <td>C. Mendoza</td>
+            <td>Mar 22, 2026</td>
           </tr>
         </tbody>
       </table>
     </div>
   </main>
 
-  <script src="shared.js"></script>
+  <script src="/front-end/js/shared.js"></script>
 </body>
+
 </html>

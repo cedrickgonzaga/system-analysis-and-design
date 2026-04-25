@@ -1,0 +1,47 @@
+# =========================
+# Environment variables
+# =========================
+backend/.env
+.env
+
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# IDE / Editor files
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Frontend (if added later)
+# =========================
+node_modules/
+
+# =========================
+# Testing / cache
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/

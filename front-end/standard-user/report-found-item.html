@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FindFix — Report Facility Issue</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FindFix — Report Found Item</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <header class="header">
@@ -31,39 +33,40 @@
   <div class="overlay" id="overlay"></div>
 
   <main class="main" id="main">
-    <div class="page-title">Report a Facility Issue</div>
-    <div class="page-subtitle">Fill in the details below. Your report will be routed to the right admin.</div>
+    <div class="page-title">Report a Found Item</div>
+    <div class="page-subtitle">Found something on campus? Submit the details so the owner can claim it.</div>
 
     <div class="card" style="max-width:520px;">
       <div class="form-group">
-        <label for="category">Issue Category</label>
+        <label for="item-name">Item Name</label>
+        <input class="form-control" type="text" id="item-name" placeholder="e.g. Black backpack" />
+      </div>
+
+      <div class="form-group">
+        <label for="location">Location Found</label>
+        <input class="form-control" type="text" id="location" placeholder="e.g. Near the canteen, Building A" />
+      </div>
+
+      <div class="form-group">
+        <label for="category">Item Category</label>
         <select class="form-control" id="category">
           <option value="" disabled selected>Select category</option>
-          <option value="computer">Computer (IT Issue)</option>
-          <option value="facility">Facility (Room/Equipment)</option>
+          <option value="electronics">Electronics</option>
+          <option value="clothing">Clothing &amp; Accessories</option>
+          <option value="school-supplies">School Supplies</option>
+          <option value="personal">Personal Item</option>
         </select>
       </div>
 
       <div class="form-group">
-        <label for="issue-name">Issue Name / Title</label>
-        <input class="form-control" type="text" id="issue-name" placeholder="e.g. Projector not working"/>
-      </div>
-
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input class="form-control" type="text" id="location" placeholder="e.g. Room 302, Building B"/>
-      </div>
-
-      <div class="form-group">
         <label for="description">Description (optional)</label>
-        <textarea class="form-control" id="description" rows="4" placeholder="Describe the issue in more detail..."></textarea>
+        <textarea class="form-control" id="description" rows="4"
+          placeholder="Any identifiable details about the item..."></textarea>
       </div>
-
       <div class="form-group">
-        <label for="attachment">Attach Image (optional, max 10MB)</label>
+        <label for="attachment">Attach Image (max 10MB)</label>
         <input class="form-control" type="file" id="attachment" accept="image/*"
-          style="padding:8px 14px; cursor:pointer;"
-          onchange="
+          style="padding:8px 14px; cursor:pointer;" onchange="
             const f = this.files[0];
             const err = document.getElementById('file-error');
             if (f && f.size > 10 * 1024 * 1024) {
@@ -72,20 +75,20 @@
             } else {
               err.style.display = 'none';
             }
-          "/>
+          " />
         <span id="file-error" style="display:none; color:var(--danger); font-size:0.8rem; margin-top:4px;">
           File exceeds 10MB limit. Please choose a smaller image.
         </span>
       </div>
 
       <div style="display:flex; gap:10px; margin-top:8px;">
-        <button class="btn btn-primary">Submit Report</button>
+        <button class="btn btn-primary">Submit</button>
         <a href="user-dashboard.html" class="btn btn-secondary">Cancel</a>
       </div>
     </div>
   </main>
 
-  <script src="shared.js"></script>
+  <script src="/front-end/js/shared.js"></script>
 </body>
-</html>
 
+</html>
