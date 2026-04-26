@@ -12,3 +12,6 @@
   (https://miro.com/app/board/uXjVGxrU5FE=/?share_link_id=25562273423)
 - Use Case
   (https://miro.com/app/board/uXjVGvJeKlE=/?share_link_id=504057002406)
+
+# System Paper
+- https://docs.google.com/document/d/1xS10uBYwXbsj8SFSDnIIctAVsrThlrCxb-3RGrS5gpQ/edit?tab=t.0
