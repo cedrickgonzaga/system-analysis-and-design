@@ -38,23 +38,17 @@
 
     <div class="card" style="max-width:420px; margin-bottom:24px;">
       <div class="form-group">
-        <label for="month">Select Month</label>
-        <select class="form-control" id="month">
-          <option value="" disabled selected>Choose a month</option>
-          <option>January 2026</option>
-          <option>February 2026</option>
-          <option>March 2026</option>
-          <option>April 2026</option>
-        </select>
+        <label for="summary-month">Select Month</label>
+        <input type="month" class="form-control" id="summary-month">
       </div>
-      <button class="btn btn-primary">Generate &amp; Print</button>
+      <button class="btn btn-primary" onclick="generateSummary()">Generate &amp; Print</button>
     </div>
 
     <!-- Preview Table -->
     <div class="section-head">
-      <h3>Preview — March 2026 (Resolved Tickets)</h3>
+      <h3 id="summary-title">Preview — Select a Month</h3>
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap" id="summary-print-area">
       <table>
         <thead>
           <tr>
@@ -65,34 +59,15 @@
             <th>Date Resolved</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>#T-039</td>
-            <td>Mouse not working</td>
-            <td>Room 105</td>
-            <td>R. Reyes</td>
-            <td>Mar 30, 2026</td>
-          </tr>
-          <tr>
-            <td>#T-038</td>
-            <td>Keyboard broken</td>
-            <td>Computer Lab 2</td>
-            <td>A. Lim</td>
-            <td>Mar 29, 2026</td>
-          </tr>
-          <tr>
-            <td>#T-035</td>
-            <td>Slow PC performance</td>
-            <td>Library PC Area</td>
-            <td>C. Mendoza</td>
-            <td>Mar 22, 2026</td>
-          </tr>
+        <tbody id="summary-table-body">
+          <tr><td colspan="5" style="text-align:center; padding:20px; color:var(--text-muted);">Please select a month to view the summary.</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

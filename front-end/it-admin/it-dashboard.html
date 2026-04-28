@@ -38,15 +38,15 @@
 
     <div class="grid-3" style="margin-bottom:28px;">
       <div class="stat-card">
-        <div class="stat-value">12</div>
+        <div class="stat-value" id="stats-pending">0</div>
         <div class="stat-label">Open Tickets</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">5</div>
+        <div class="stat-value" id="stats-progress">0</div>
         <div class="stat-label">In Progress</div>
       </div>
       <div class="stat-card">
-        <div class="stat-value">38</div>
+        <div class="stat-value" id="stats-resolved">0</div>
         <div class="stat-label">Resolved This Month</div>
       </div>
     </div>
@@ -67,34 +67,16 @@
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>#T-041</td>
-            <td>PC won't boot</td>
-            <td>Computer Lab 1</td>
-            <td>Apr 1, 2026</td>
-            <td><span class="badge badge-pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td>#T-040</td>
-            <td>No internet connection</td>
-            <td>Library PC Area</td>
-            <td>Mar 31, 2026</td>
-            <td><span class="badge badge-pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td>#T-039</td>
-            <td>Mouse not working</td>
-            <td>Room 105</td>
-            <td>Mar 30, 2026</td>
-            <td><span class="badge badge-resolved">Resolved</span></td>
-          </tr>
+        <tbody id="recent-tickets-table">
+          <!-- Dynamic Content -->
+          <tr><td colspan="5" style="text-align:center; padding:20px;">Loading recent tickets...</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

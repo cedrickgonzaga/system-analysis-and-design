@@ -49,93 +49,16 @@
             <th>Change Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>#T-041</td>
-            <td>J. Santos</td>
-            <td>PC won't boot</td>
-            <td>Computer Lab 1</td>
-            <td>Apr 1, 2026</td>
-            <td><span class="badge badge-pending">Pending</span></td>
-            <td>
-              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;"
-                onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
-                <option value="pending" selected>Pending</option>
-                <option value="approved">In Progress</option>
-                <option value="resolved">Resolved</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>#T-040</td>
-            <td>M. Cruz</td>
-            <td>No internet connection</td>
-            <td>Library PC Area</td>
-            <td>Mar 31, 2026</td>
-            <td><span class="badge badge-pending">Pending</span></td>
-            <td>
-              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;"
-                onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
-                <option value="pending" selected>Pending</option>
-                <option value="approved">In Progress</option>
-                <option value="resolved">Resolved</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>#T-039</td>
-            <td>R. Reyes</td>
-            <td>Mouse not working</td>
-            <td>Room 105</td>
-            <td>Mar 30, 2026</td>
-            <td><span class="badge badge-resolved">Resolved</span></td>
-            <td>
-              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;"
-                onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
-                <option value="pending">Pending</option>
-                <option value="approved">In Progress</option>
-                <option value="resolved" selected>Resolved</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>#T-038</td>
-            <td>A. Lim</td>
-            <td>Keyboard broken</td>
-            <td>Computer Lab 2</td>
-            <td>Mar 29, 2026</td>
-            <td><span class="badge badge-resolved">Resolved</span></td>
-            <td>
-              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;"
-                onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
-                <option value="pending">Pending</option>
-                <option value="approved">In Progress</option>
-                <option value="resolved" selected>Resolved</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>#T-037</td>
-            <td>B. Torres</td>
-            <td>Monitor has dead pixels</td>
-            <td>Room 202</td>
-            <td>Mar 28, 2026</td>
-            <td><span class="badge badge-pending">Pending</span></td>
-            <td>
-              <select class="form-control" style="padding:5px 10px; font-size:0.8rem; border-radius:999px;"
-                onchange="this.closest('tr').querySelector('.badge').className='badge badge-'+this.value; this.closest('tr').querySelector('.badge').textContent=this.options[this.selectedIndex].text;">
-                <option value="pending" selected>Pending</option>
-                <option value="approved">In Progress</option>
-                <option value="resolved">Resolved</option>
-              </select>
-            </td>
-          </tr>
+        <tbody id="admin-tickets-table">
+          <!-- Dynamic Content -->
+          <tr><td colspan="7" style="text-align:center; padding:20px;">Loading tickets...</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

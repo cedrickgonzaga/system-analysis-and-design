@@ -36,10 +36,10 @@
     <div class="page-title">Report a Facility Issue</div>
     <div class="page-subtitle">Fill in the details below. Your report will be routed to the right admin.</div>
 
-    <div class="card" style="max-width:520px;">
+    <form id="reportFacilityForm" class="card" style="max-width:520px;">
       <div class="form-group">
         <label for="category">Issue Category</label>
-        <select class="form-control" id="category">
+        <select class="form-control" id="category" required>
           <option value="" disabled selected>Select category</option>
           <option value="computer">Computer (IT Issue)</option>
           <option value="facility">Facility (Room/Equipment)</option>
@@ -48,12 +48,12 @@
 
       <div class="form-group">
         <label for="issue-name">Issue Name / Title</label>
-        <input class="form-control" type="text" id="issue-name" placeholder="e.g. Projector not working" />
+        <input class="form-control" type="text" id="issue-name" placeholder="e.g. Projector not working" required />
       </div>
 
       <div class="form-group">
         <label for="location">Location</label>
-        <input class="form-control" type="text" id="location" placeholder="e.g. Room 302, Building B" />
+        <input class="form-control" type="text" id="location" placeholder="e.g. Room 302, Building B" required />
       </div>
 
       <div class="form-group">
@@ -81,13 +81,16 @@
       </div>
 
       <div style="display:flex; gap:10px; margin-top:8px;">
-        <button class="btn btn-primary">Submit Report</button>
+        <button type="submit" class="btn btn-primary">Submit Report</button>
         <a href="user-dashboard.html" class="btn btn-secondary">Cancel</a>
       </div>
-    </div>
+    </form>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

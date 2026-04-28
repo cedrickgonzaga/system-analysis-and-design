@@ -36,25 +36,25 @@
     <div class="page-title">Report a Found Item</div>
     <div class="page-subtitle">Found something on campus? Submit the details so the owner can claim it.</div>
 
-    <div class="card" style="max-width:520px;">
+    <form id="reportFoundItemForm" class="card" style="max-width:520px;">
       <div class="form-group">
         <label for="item-name">Item Name</label>
-        <input class="form-control" type="text" id="item-name" placeholder="e.g. Black backpack" />
+        <input class="form-control" type="text" id="item-name" placeholder="e.g. Black backpack" required />
       </div>
 
       <div class="form-group">
         <label for="location">Location Found</label>
-        <input class="form-control" type="text" id="location" placeholder="e.g. Near the canteen, Building A" />
+        <input class="form-control" type="text" id="location" placeholder="e.g. Near the canteen, Building A" required />
       </div>
 
       <div class="form-group">
         <label for="category">Item Category</label>
-        <select class="form-control" id="category">
+        <select class="form-control" id="category" required>
           <option value="" disabled selected>Select category</option>
-          <option value="electronics">Electronics</option>
-          <option value="clothing">Clothing &amp; Accessories</option>
-          <option value="school-supplies">School Supplies</option>
-          <option value="personal">Personal Item</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Clothing">Clothing &amp; Accessories</option>
+          <option value="School Supplies">School Supplies</option>
+          <option value="Personal Item">Personal Item</option>
         </select>
       </div>
 
@@ -82,13 +82,16 @@
       </div>
 
       <div style="display:flex; gap:10px; margin-top:8px;">
-        <button class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
         <a href="user-dashboard.html" class="btn btn-secondary">Cancel</a>
       </div>
-    </div>
+    </form>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

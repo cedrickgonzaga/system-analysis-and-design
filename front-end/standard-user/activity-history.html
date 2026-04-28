@@ -50,45 +50,16 @@
             <th>Status</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>001</td>
-            <td>Facility Issue</td>
-            <td>Broken AC Unit</td>
-            <td>Room 201, Bldg A</td>
-            <td>Mar 28, 2026</td>
-            <td><span class="badge badge-pending">Pending</span></td>
-          </tr>
-          <tr>
-            <td>002</td>
-            <td>Lost &amp; Found</td>
-            <td>Black Umbrella</td>
-            <td>Near Library</td>
-            <td>Mar 25, 2026</td>
-            <td><span class="badge badge-approved">Approved</span></td>
-          </tr>
-          <tr>
-            <td>003</td>
-            <td>Facility Issue</td>
-            <td>Projector Not Working</td>
-            <td>Room 302, Bldg B</td>
-            <td>Mar 20, 2026</td>
-            <td><span class="badge badge-resolved">Resolved</span></td>
-          </tr>
-          <tr>
-            <td>004</td>
-            <td>Lost &amp; Found</td>
-            <td>Blue Water Bottle</td>
-            <td>Canteen Area</td>
-            <td>Mar 18, 2026</td>
-            <td><span class="badge badge-rejected">Rejected</span></td>
-          </tr>
+        <tbody id="activity-table-body">
+          <!-- Dynamic Content -->
+          <tr><td colspan="6" style="text-align:center; padding:20px;">Loading your activity history...</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

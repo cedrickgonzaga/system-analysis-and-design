@@ -38,22 +38,16 @@
 
     <div class="card" style="max-width:420px; margin-bottom:24px;">
       <div class="form-group">
-        <label for="month">Select Month</label>
-        <select class="form-control" id="month">
-          <option value="" disabled selected>Choose a month</option>
-          <option>January 2026</option>
-          <option>February 2026</option>
-          <option>March 2026</option>
-          <option>April 2026</option>
-        </select>
+        <label for="summary-month">Select Month</label>
+        <input type="month" class="form-control" id="summary-month">
       </div>
-      <button class="btn btn-primary">Generate &amp; Print</button>
+      <button class="btn btn-primary" onclick="generateSummary()">Generate &amp; Print</button>
     </div>
 
     <div class="section-head">
-      <h3>Preview — March 2026 (Resolved Tickets)</h3>
+      <h3 id="summary-title">Preview — Select a Month</h3>
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap" id="summary-print-area">
       <table>
         <thead>
           <tr>
@@ -64,34 +58,15 @@
             <th>Date Resolved</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>#F-019</td>
-            <td>Leaking roof</td>
-            <td>Room 204</td>
-            <td>R. Garcia</td>
-            <td>Mar 30, 2026</td>
-          </tr>
-          <tr>
-            <td>#F-015</td>
-            <td>Broken bench</td>
-            <td>Lobby Area</td>
-            <td>T. Villanueva</td>
-            <td>Mar 22, 2026</td>
-          </tr>
-          <tr>
-            <td>#F-012</td>
-            <td>Damaged whiteboard</td>
-            <td>Room 108</td>
-            <td>S. Aquino</td>
-            <td>Mar 18, 2026</td>
-          </tr>
+        <tbody id="summary-table-body">
+          <tr><td colspan="5" style="text-align:center; padding:20px; color:var(--text-muted);">Please select a month to view the summary.</td></tr>
         </tbody>
       </table>
     </div>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

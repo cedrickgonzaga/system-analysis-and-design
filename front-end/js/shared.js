@@ -1,10 +1,39 @@
-// shared.js — sidebar + theme toggle
+// shared.js — sidebar + theme toggle + auth guard
 function initPage() {
+  // 1. Auth Guard: Redirect to login if no token is found, 
+  // unless we are already on a public page (login, register, forgot-password).
+  const publicPages = ['login.html', 'register.html', 'forgot-password.html', 'index.html'];
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const token = localStorage.getItem('token');
+
+  if (!token && !publicPages.includes(currentPage)) {
+    // If we are in a subdirectory, we need to go up one level to reach the landing page
+    const isSubdir = window.location.pathname.includes('/standard-user/') || 
+                     window.location.pathname.includes('/it-admin/') || 
+                     window.location.pathname.includes('/facility-admin/') || 
+                     window.location.pathname.includes('/security-admin/');
+    
+    const loginPath = isSubdir ? '../landing-login-register-page/login.html' : 'landing-login-register-page/login.html';
+    window.location.href = loginPath;
+    return;
+  }
+
+  // 2. Sidebar & Theme Logic
   const hamburger = document.getElementById('hamburger');
   const sidebar   = document.getElementById('sidebar');
   const main      = document.getElementById('main');
   const overlay   = document.getElementById('overlay');
   const themebtn  = document.getElementById('themeToggle');
+  const logoutBtn = document.querySelector('a[href="login.html"], .logout-link');
+
+  // Handle logout
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.clear();
+      window.location.href = '../landing-login-register-page/login.html';
+    });
+  }
 
   let sidebarOpen = true;
 
@@ -25,5 +54,14 @@ function initPage() {
     document.body.classList.toggle('light');
     localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
   });
+
+  // Display user info if available
+  const profileIcon = document.querySelector('.profile-icon');
+  const fullName = localStorage.getItem('full_name');
+  if (profileIcon && fullName) {
+    const initials = fullName.split(' ').map(n => n[0]).join('').toUpperCase();
+    profileIcon.textContent = initials.substring(0, 2);
+    profileIcon.title = fullName;
+  }
 }
 document.addEventListener('DOMContentLoaded', initPage);

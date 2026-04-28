@@ -36,66 +36,32 @@
     <div class="page-title">Lost &amp; Found Gallery</div>
     <div class="page-subtitle">Browse approved found items. Is one of these yours?</div>
 
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
-          <span style="font-size:2.5rem;">🎒</span>
-          <span style="font-size:0.7rem;">No image uploaded</span>
-        </div>
-        <div class="gallery-info">
-          <h4>Black Backpack</h4>
-          <p>📍 Near Canteen</p>
-          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Apr 1, 2026 — 10:32 AM</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
-          <span style="font-size:2.5rem;">☂️</span>
-          <span style="font-size:0.7rem;">No image uploaded</span>
-        </div>
-        <div class="gallery-info">
-          <h4>Blue Umbrella</h4>
-          <p>📍 Library Entrance</p>
-          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 31, 2026 — 2:15 PM</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
-          <span style="font-size:2.5rem;">📱</span>
-          <span style="font-size:0.7rem;">No image uploaded</span>
-        </div>
-        <div class="gallery-info">
-          <h4>Android Phone</h4>
-          <p>📍 Room 101, Bldg A</p>
-          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 31, 2026 — 9:05 AM</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
-          <span style="font-size:2.5rem;">🔑</span>
-          <span style="font-size:0.7rem;">No image uploaded</span>
-        </div>
-        <div class="gallery-info">
-          <h4>Key with Keychain</h4>
-          <p>📍 Hallway, 2nd Floor</p>
-          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 30, 2026 — 3:48 PM</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-thumb" style="font-size:1rem; color:var(--text-muted); flex-direction:column; gap:4px;">
-          <span style="font-size:2.5rem;">📓</span>
-          <span style="font-size:0.7rem;">No image uploaded</span>
-        </div>
-        <div class="gallery-info">
-          <h4>Notebook</h4>
-          <p>📍 Classroom 205</p>
-          <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 Mar 30, 2026 — 11:20 AM</p>
-        </div>
-      </div>
+    <div style="margin-bottom: 20px; max-width: 600px; display: flex; gap: 10px;">
+      <input type="text" id="gallery-search" class="form-control" placeholder="Search by item name..." style="flex: 1;" oninput="filterGallery()">
+      <select id="gallery-category" class="form-control" style="width: 180px;" onchange="filterGallery()">
+        <option value="">All Categories</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing &amp; Accessories</option>
+        <option value="School Supplies">School Supplies</option>
+        <option value="Personal Item">Personal Item</option>
+      </select>
+    </div>
+
+    <div class="gallery-grid" id="gallery-grid">
+      <!-- Dynamic Content -->
+      <div style="grid-column: 1/-1; text-align:center; padding:40px; color:var(--text-muted);">Loading gallery items...</div>
     </div>
   </main>
 
-  <script src="/front-end/js/shared.js"></script>
+  <style>
+    /* Ensure dynamic cards look good */
+    .gallery-img { height: 180px; background: var(--bg-alt); border-radius: 8px; overflow: hidden; }
+    .gallery-item-title { font-weight: 600; margin-top: 14px; font-size: 1.1rem; }
+    .gallery-item-meta { font-size: 0.9rem; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+  </style>
+
+  <script src="../js/app.js"></script>
+  <script src="../js/shared.js"></script>
 </body>
 
 </html>

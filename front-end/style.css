@@ -446,6 +446,11 @@ tbody tr:last-child td {
   color: var(--danger);
 }
 
+.badge-progress {
+  background: rgba(59, 158, 255, 0.15);
+  color: var(--accent);
+}
+
 .badge-approved {
   background: rgba(59, 158, 255, 0.15);
   color: var(--accent);
@@ -518,8 +523,8 @@ tbody tr:last-child td {
 /* ── Gallery Grid ── */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
 }
 
 .gallery-item {
@@ -531,33 +536,33 @@ tbody tr:last-child td {
 
 .gallery-thumb {
   width: 100%;
-  height: 120px;
+  height: 180px;
   background: var(--surface2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 .gallery-info {
-  padding: 12px;
+  padding: 14px;
 }
 
 .gallery-info h4 {
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .gallery-info p {
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   color: var(--text-muted);
-  margin-top: 3px;
+  margin-top: 4px;
 }
 
 .gallery-actions {
-  padding: 0 12px 12px;
+  padding: 0 14px 14px;
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -590,7 +595,23 @@ tbody tr:last-child td {
   z-index: 89;
 }
 
-.overlay.visible {
-  display: block;
+@media print {
+  .header, .sidebar, .card, .btn {
+    display: none !important;
+  }
+  .main {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .table-wrap {
+    border: none;
+  }
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .page-title, .page-subtitle, .section-head {
+    color: #000;
+  }
 }
 
