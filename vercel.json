@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "back-end/main.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "front-end/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "back-end/main.py"
+    },
+    {
+      "source": "/auth/(.*)",
+      "destination": "back-end/main.py"
+    },
+    {
+      "source": "/tickets/(.*)",
+      "destination": "back-end/main.py"
+    },
+    {
+      "source": "/items/(.*)",
+      "destination": "back-end/main.py"
+    },
+    {
+      "source": "/claims/(.*)",
+      "destination": "back-end/main.py"
+    },
+    {
+      "source": "/admin/(.*)",
+      "destination": "back-end/main.py"
+    },
+    {
+      "source": "/",
+      "destination": "front-end/landing-login-register-page/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "front-end/$1"
+    }
+  ]
+}

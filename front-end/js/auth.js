@@ -1,4 +1,4 @@
-const API_BASE = "https://system-analysis-and-design-production.up.railway.app";
+const API_BASE = "";
 
 function showAuthMessage(message, isError = true) {
     const msgDiv = document.getElementById("authMessage");
