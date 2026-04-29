@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "back-end/app/main.py",
+      "src": "back-end/main.py",
       "use": "@vercel/python"
     },
     {
@@ -13,27 +13,27 @@
   "rewrites": [
     {
       "source": "/auth/(.*)",
-      "destination": "back-end/app/main.py"
+      "destination": "back-end/main.py"
     },
     {
       "source": "/tickets/(.*)",
-      "destination": "back-end/app/main.py"
+      "destination": "back-end/main.py"
     },
     {
       "source": "/items/(.*)",
-      "destination": "back-end/app/main.py"
+      "destination": "back-end/main.py"
     },
     {
       "source": "/claims/(.*)",
-      "destination": "back-end/app/main.py"
+      "destination": "back-end/main.py"
     },
     {
       "source": "/admin/(.*)",
-      "destination": "back-end/app/main.py"
+      "destination": "back-end/main.py"
     },
     {
       "source": "/api/(.*)",
-      "destination": "back-end/app/main.py"
+      "destination": "back-end/main.py"
     },
     {
       "source": "/(login|register|forgot-password)",

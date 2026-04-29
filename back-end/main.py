@@ -1,7 +1,13 @@
+import sys
+import os
+
+# Add the back-end directory to the Python path so Vercel can find the 'app' module
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .auth import router as auth_router
-from .routers import tickets, items, claims, admins
+from app.auth import router as auth_router
+from app.routers import tickets, items, claims, admins
 
 app = FastAPI()
 
