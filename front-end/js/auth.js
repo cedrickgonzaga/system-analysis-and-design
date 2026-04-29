@@ -45,7 +45,7 @@ async function login(email, password) {
         }, 1000);
 
     } catch (err) {
-        console.error(err);
+        console.error("Login Fetch Error:", err);
         showAuthMessage("Connection error. Is the backend running?");
     }
 }

@@ -12,10 +12,6 @@
   ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "back-end/main.py"
-    },
-    {
       "source": "/auth/(.*)",
       "destination": "back-end/main.py"
     },
@@ -34,6 +30,14 @@
     {
       "source": "/admin/(.*)",
       "destination": "back-end/main.py"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "back-end/main.py"
+    },
+    {
+      "source": "/(login|register|forgot-password)",
+      "destination": "front-end/landing-login-register-page/$1.html"
     },
     {
       "source": "/",
