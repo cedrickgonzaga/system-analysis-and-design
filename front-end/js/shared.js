@@ -2,11 +2,17 @@
 function initPage() {
   // 1. Auth Guard: Redirect to login if no token is found, 
   // unless we are already on a public page (login, register, forgot-password).
-  const publicPages = ['login.html', 'register.html', 'forgot-password.html', 'index.html'];
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const publicPages = ['login.html', 'register.html', 'forgot-password.html', 'index.html', 'login', 'register', 'forgot-password', ''];
+  const pathParts = window.location.pathname.split('/');
+  const currentPage = pathParts.pop() || 'index.html';
   const token = localStorage.getItem('token');
 
-  if (!token && !publicPages.includes(currentPage)) {
+  // Check if we are on a public page
+  const isPublicPage = publicPages.includes(currentPage) || 
+                       (window.location.pathname === '/') ||
+                       (window.location.pathname.endsWith('/landing-login-register-page/'));
+
+  if (!token && !isPublicPage) {
     // If we are in a subdirectory, we need to go up one level to reach the landing page
     const isSubdir = window.location.pathname.includes('/standard-user/') || 
                      window.location.pathname.includes('/it-admin/') || 
