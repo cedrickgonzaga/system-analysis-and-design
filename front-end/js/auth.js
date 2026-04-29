@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8000";
+const API_BASE = "https://system-analysis-and-design-production.up.railway.app";
 
 function showAuthMessage(message, isError = true) {
     const msgDiv = document.getElementById("authMessage");

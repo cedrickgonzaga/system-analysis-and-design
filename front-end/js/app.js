@@ -1,4 +1,4 @@
-const API_BASE = "system-analysis-and-design-production.up.railway.app";
+const API_BASE = "https://system-analysis-and-design-production.up.railway.app";
 
 // --- UTILITIES ---
 
