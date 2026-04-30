@@ -14,6 +14,7 @@ async def report_item(data: FoundItemCreate, user=Depends(get_current_user)):
         "image_url": data.image_url,
         "category": data.category,
         "location": data.location,
+        "possession": data.possession,  # Save where the item is
         "status": "pending"  # needs security approval
     }).execute()
     return {"message": "Item reported"}

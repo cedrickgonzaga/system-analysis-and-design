@@ -31,6 +31,7 @@ class FoundItemCreate(BaseModel):
     image_url: Optional[str] = None
     category: Literal["Electronics", "Clothing", "School Supplies", "Personal Item"]
     location: str
+    possession: Literal["security", "finder"]  # New field: where is the item now?
 
 class ClaimCreate(BaseModel):
     proof_image_url: str

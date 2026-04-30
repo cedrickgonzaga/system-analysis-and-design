@@ -59,6 +59,23 @@
       </div>
 
       <div class="form-group">
+        <label>Current Possession / Location</label>
+        <div style="display: flex; gap: 20px; margin-top: 8px;">
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 400;">
+            <input type="radio" name="possession" value="security" checked required>
+            Submitted to Security
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 400;">
+            <input type="radio" name="possession" value="finder">
+            I have it with me
+          </label>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">
+          Owners will know whether to go to the Security Office or contact you.
+        </p>
+      </div>
+
+      <div class="form-group">
         <label for="description">Description (optional)</label>
         <textarea class="form-control" id="description" rows="4"
           placeholder="Any identifiable details about the item..."></textarea>

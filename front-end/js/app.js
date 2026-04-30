@@ -1,4 +1,4 @@
-const API_BASE = "";
+const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:" ? "http://127.0.0.1:8000" : "";
 
 // --- UTILITIES ---
 
@@ -146,6 +146,7 @@ async function handleFoundItemReport(e) {
     const itemName = document.getElementById("item-name").value;
     const location = document.getElementById("location").value;
     const category = document.getElementById("category").value;
+    const possession = form.querySelector('input[name="possession"]:checked').value;
     const description = document.getElementById("description").value;
     const fileInput = document.getElementById("attachment");
 
@@ -177,7 +178,8 @@ async function handleFoundItemReport(e) {
                 location,
                 category,
                 description,
-                image_url: imageUrl
+                image_url: imageUrl,
+                possession: possession
             })
         });
 
@@ -230,6 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function loadSecurityDashboard() {
+    console.log("Loading Security Dashboard...");
     const pendingCount = document.getElementById("stats-pending");
     const galleryCount = document.getElementById("stats-gallery");
     const claimedCount = document.getElementById("stats-claimed");
@@ -239,22 +242,23 @@ async function loadSecurityDashboard() {
         // Stats: Pending vs All Items
         const allItemsRes = await fetchWithAuth(`${API_BASE}/admin/items`);
         const allItems = await allItemsRes.json();
+        console.log("Security items fetched:", allItems.length);
         
         const pending = allItems.filter(i => i.status === "pending");
-        const approved = allItems.filter(i => i.status === "approved");
+        const approved = allItems.filter(i => i.status === "approved" || i.status === "claimed"); // Approved includes items that are later claimed
+        const displayedApproved = allItems.filter(i => i.status === "approved");
         
         // Calculate Claimed This Month
         const currentMonth = new Date().getMonth();
         const currentYear = new Date().getFullYear();
         const claimedThisMonth = allItems.filter(i => {
             if (i.status !== "claimed") return false;
-            // Assumes updated_at or created_at for claim time. Let's use created_at as fallback or update time.
-            const d = new Date(i.created_at); // Simplification, could be updated_at from backend
+            const d = new Date(i.created_at);
             return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
         });
 
         if (pendingCount) pendingCount.textContent = pending.length;
-        if (galleryCount) galleryCount.textContent = approved.length;
+        if (galleryCount) galleryCount.textContent = displayedApproved.length;
         if (claimedCount) claimedCount.textContent = claimedThisMonth.length;
 
         if (recentTable) {
@@ -470,6 +474,7 @@ async function updateTicketStatus(ticketId, newStatus) {
 
 
 async function loadAdminDashboard() {
+    console.log("Loading Admin Dashboard (IT/Facility)...");
     const pendingCount = document.getElementById("stats-pending");
     const progressCount = document.getElementById("stats-progress");
     const resolvedCount = document.getElementById("stats-resolved");
@@ -479,6 +484,7 @@ async function loadAdminDashboard() {
         // 1. Load Stats
         const statsRes = await fetchWithAuth(`${API_BASE}/admin/dashboard-stats`);
         const stats = await statsRes.json();
+        console.log("Admin stats fetched:", stats);
         
         if (pendingCount) pendingCount.textContent = stats.pending;
         if (progressCount) progressCount.textContent = stats.in_progress;
@@ -545,33 +551,55 @@ function renderGallery(items) {
     galleryContainer.innerHTML = "";
     items.forEach(item => {
         const card = document.createElement("div");
-        card.className = "gallery-item card"; // Added 'card' for better styling
-        card.style.transition = "border-color 0.2s, background 0.2s";
-        card.onmouseover = () => { card.style.borderColor = "var(--accent)"; };
-        card.onmouseout = () => { card.style.borderColor = "var(--border)"; };
+        card.className = "gallery-item card";
         
         const posterName = item.poster ? item.poster.full_name : "Unknown";
         const posterEmail = item.poster ? item.poster.school_email : "No email provided";
+        
+        // Determine possession text and icon
+        const isAtSecurity = item.possession === "security";
+        const posText = isAtSecurity ? "At Security Office" : "With Finder";
+        const posIcon = isAtSecurity ? "🏢" : "👤";
+        const posClass = isAtSecurity ? "badge-approved" : "badge-progress";
 
         card.innerHTML = `
             <div class="gallery-img" style="border-radius: var(--radius-sm); overflow: hidden; height: 180px; cursor: zoom-in;" onclick="openImageModal('${item.image_url || ''}', '${item.item_name.replace(/'/g, "\\'")}')">
-                ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" style="width:100%; height:100%; object-fit:cover; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">` : `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:var(--bg-alt); color:var(--text-muted); font-size: 3rem;">📦</div>`}
+                ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" style="width:100%; height:100%; object-fit:cover;">` : `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:var(--bg-alt); color:var(--text-muted); font-size: 3rem;">📦</div>`}
             </div>
             <div class="gallery-content" style="padding-top: 14px;">
-                <div class="gallery-item-title" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 4px;">${item.item_name}</div>
-                <div class="gallery-item-meta" style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.4;">
-                    📍 ${item.location} <br>
-                    🕐 ${formatDate(item.created_at)} <br>
-                    ✉️ <a href="mailto:${posterEmail}" style="color:var(--accent); text-decoration:none;">${posterEmail}</a>
+                <div style="margin-bottom: 8px;">
+                    <span class="badge ${posClass}" style="font-size: 0.75rem;">${posIcon} ${posText}</span>
                 </div>
+                <div class="gallery-item-title" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 4px;">${item.item_name}</div>
+                <div class="gallery-item-meta" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
+                    📍 Found: ${item.location} <br>
+                    🕐 ${formatDate(item.created_at)}
+                </div>
+                
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.85rem;">
+                    <div style="font-weight: 600; color: var(--text);">Finder Information:</div>
+                    <div style="color: var(--text-muted);">${posterName}</div>
+                    <a href="mailto:${posterEmail}" style="color:var(--accent); text-decoration:none;">${posterEmail}</a>
+                </div>
+
                 <div style="display:flex; gap:10px; margin-top:16px;">
-                    <button class="btn btn-primary btn-full" onclick="alert('Claim feature coming soon!')" style="padding: 10px; font-size: 0.95rem;">Claim</button>
-                    <button class="btn btn-secondary btn-full" onclick="alert('Details for: ${item.item_name}\\nFound by: ${posterName}')" style="padding: 10px; font-size: 0.95rem;">Details</button>
+                    ${isAtSecurity ? 
+                        `<button class="btn btn-primary btn-full" onclick="startClaimProcess(${item.id}, '${item.item_name.replace(/'/g, "\\'")}')">Claim Now</button>` : 
+                        `<a href="mailto:${posterEmail}?subject=Found Item: ${item.item_name}" class="btn btn-secondary btn-full" style="text-decoration:none; text-align:center; display:flex; align-items:center; justify-content:center;">Contact Finder</a>`
+                    }
                 </div>
             </div>
         `;
         galleryContainer.appendChild(card);
     });
+}
+
+// --- CLAIM LOGIC ---
+function startClaimProcess(itemId, itemName) {
+    alert(`To claim your item: "${itemName}"\n\n` +
+          `Please proceed to the Security Office.\n` +
+          `Location: Ground Floor (1st Floor), right side of Room 101.\n\n` +
+          `Note: Bring your school ID or any valid identification for verification.`);
 }
 
 window.filterGallery = function() {
