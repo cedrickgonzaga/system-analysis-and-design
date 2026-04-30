@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from app.dependencies import get_current_user
 from app.database import supabase
 from app.models import StatusUpdate
+from datetime import datetime
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -19,7 +20,8 @@ async def get_tickets(user=Depends(get_current_user)):
 @router.patch("/tickets/{ticket_id}/status")
 async def update_ticket_status(ticket_id: int, data: StatusUpdate, user=Depends(get_current_user)):
     check_role(user, ["it_admin", "facility_admin"])
-    supabase.table("issue_tickets").update({"status": data.status, "updated_at": "now()"}).eq("id", ticket_id).execute()
+    now_iso = datetime.utcnow().isoformat()
+    supabase.table("issue_tickets").update({"status": data.status, "updated_at": now_iso}).eq("id", ticket_id).execute()
     return {"message": "Status updated"}
 
 @router.get("/dashboard-stats")
@@ -86,10 +88,24 @@ async def update_claim_status(claim_id: int, data: StatusUpdate, user=Depends(ge
 async def get_summary(month: str, user=Depends(get_current_user)):
     check_role(user, ["it_admin", "facility_admin"])
     category = "computer" if user["role"] == "it_admin" else "facility"
+    
+    # month is in YYYY-MM format
+    # Use robust GTE/LT filtering for timestamp columns
+    start_date = f"{month}-01T00:00:00"
+    
+    # Simple logic for next month to avoid complex calendar math
+    year, mon = map(int, month.split("-"))
+    if mon == 12:
+        end_date = f"{year+1}-01-01T00:00:00"
+    else:
+        end_date = f"{year}-{mon+1:02d}-01T00:00:00"
+    
     res = supabase.table("issue_tickets").select("*, reporter:users(full_name)") \
         .eq("category", category) \
         .eq("status", "Resolved") \
-        .filter("updated_at", "gte", f"{month}-01") \
-        .filter("updated_at", "lt", f"{month}-31") \
+        .gte("updated_at", start_date) \
+        .lt("updated_at", end_date) \
+        .order("updated_at", desc=True) \
         .execute()
+        
     return res.data

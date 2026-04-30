@@ -38,8 +38,16 @@
 
     <div class="card" style="max-width:420px; margin-bottom:24px;">
       <div class="form-group">
-        <label for="summary-month">Select Month</label>
-        <input type="month" class="form-control" id="summary-month">
+        <label for="summary-month">Select Month (YYYY-MM)</label>
+        <div style="position: relative;">
+          <input type="month" class="form-control" id="summary-month" 
+            style="cursor: pointer; background-color: var(--bg-alt); color: var(--text); min-height: 45px;"
+            placeholder="Select Month">
+          <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; opacity: 0.6;">📅</span>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">
+          Note: Click the calendar icon or the box to pick. If not supported, type like: 2026-05
+        </p>
       </div>
       <button class="btn btn-primary" onclick="generateSummary()">Generate &amp; Print</button>
     </div>

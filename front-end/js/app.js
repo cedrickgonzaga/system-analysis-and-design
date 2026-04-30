@@ -217,11 +217,18 @@ document.addEventListener("DOMContentLoaded", () => {
     if (foundItemForm) foundItemForm.addEventListener("submit", handleFoundItemReport);
     
     const summaryMonth = document.getElementById("summary-month");
-    if (summaryMonth) summaryMonth.addEventListener("change", loadSummaryPreview);
+    if (summaryMonth) {
+        summaryMonth.addEventListener("change", loadSummaryPreview);
+        // Force picker on click for desktop browsers
+        summaryMonth.addEventListener("click", (e) => {
+            if (typeof e.target.showPicker === 'function') {
+                e.target.showPicker();
+            }
+        });
+    }
 
     // Page Loaders
     const path = window.location.pathname;
-    if (path.includes("user-dashboard.html")) loadUserDashboard();
     if (path.includes("activity-history.html")) loadActivityHistory();
     if (path.includes("lost-found-gallery.html")) loadLostFoundGallery();
     if (path.includes("it-dashboard.html") || path.includes("facility-dashboard.html")) loadAdminDashboard();
@@ -245,7 +252,6 @@ async function loadSecurityDashboard() {
         console.log("Security items fetched:", allItems.length);
         
         const pending = allItems.filter(i => i.status === "pending");
-        const approved = allItems.filter(i => i.status === "approved" || i.status === "claimed"); // Approved includes items that are later claimed
         const displayedApproved = allItems.filter(i => i.status === "approved");
         
         // Calculate Claimed This Month
@@ -655,42 +661,6 @@ async function loadActivityHistory() {
 }
 
 
-
-async function loadUserDashboard() {
-    const activityContainer = document.getElementById("recent-activity-list");
-    if (!activityContainer) return;
-
-    try {
-        const res = await fetchWithAuth(`${API_BASE}/tickets/activity`);
-        const data = await res.json();
-
-        if (data.length === 0) {
-            activityContainer.innerHTML = `<p style="text-align:center; color:var(--text-muted); padding:20px;">No recent activity found.</p>`;
-            return;
-        }
-
-        activityContainer.innerHTML = "";
-        // Take only top 4
-        data.slice(0, 4).forEach(item => {
-            const card = document.createElement("div");
-            card.className = "activity-card";
-            card.innerHTML = `
-                <div class="activity-info">
-                    <div class="activity-type">${item.type}</div>
-                    <div class="activity-title">${item.title}</div>
-                    <div class="activity-meta">${item.location} • ${formatDate(item.date_submitted)}</div>
-                </div>
-                <div class="activity-status">${getStatusBadge(item.status)}</div>
-            `;
-            activityContainer.appendChild(card);
-        });
-
-    } catch (err) {
-        console.error(err);
-        activityContainer.innerHTML = `<p style="color:var(--danger);">Error loading activity.</p>`;
-    }
-}
-
 // --- SUMMARY FUNCTIONS ---
 
 async function loadSummaryPreview() {
@@ -739,7 +709,6 @@ function generateSummary() {
         alert("Please select a month first.");
         return;
     }
-    // Simple print. For a true print view, you'd hide the sidebar/header via CSS print media queries.
     window.print();
 }
 
