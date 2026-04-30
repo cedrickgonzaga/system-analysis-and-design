@@ -63,11 +63,29 @@ function initPage() {
 
   // Display user info if available
   const profileIcon = document.querySelector('.profile-icon');
+  const userGreeting = document.getElementById('user-greeting');
   const fullName = localStorage.getItem('full_name');
-  if (profileIcon && fullName) {
-    const initials = fullName.split(' ').map(n => n[0]).join('').toUpperCase();
-    profileIcon.textContent = initials.substring(0, 2);
-    profileIcon.title = fullName;
+
+  if (fullName) {
+    // 1. Update Profile Icon (Initials)
+    if (profileIcon) {
+      const initials = fullName.split(' ').map(n => n[0]).join('').toUpperCase();
+      profileIcon.textContent = initials.substring(0, 2);
+      profileIcon.title = fullName;
+    }
+
+    // 2. Update Dashboard Greeting
+    if (userGreeting) {
+      const firstName = fullName.split(' ')[0];
+      const currentSub = userGreeting.textContent;
+      
+      if (window.location.pathname.includes('user-dashboard.html')) {
+        userGreeting.textContent = `Hello, ${firstName}! What would you like to do today?`;
+      } else {
+        // For Admins, prepend the greeting
+        userGreeting.textContent = `Hello, ${firstName}! ${currentSub}`;
+      }
+    }
   }
 }
 document.addEventListener('DOMContentLoaded', initPage);
