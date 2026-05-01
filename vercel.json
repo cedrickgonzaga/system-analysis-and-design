@@ -36,7 +36,7 @@
       "destination": "back-end/main.py"
     },
     {
-      "source": "/(login|register|forgot-password)",
+      "source": "/(login|register|forgot-password)(.html)?",
       "destination": "front-end/landing-login-register-page/$1.html"
     },
     {
