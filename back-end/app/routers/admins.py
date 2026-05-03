@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from app.dependencies import get_current_user
 from app.database import supabase
-from app.models import StatusUpdate
+from app.models import StatusUpdate, ClaimerInfo
 from datetime import datetime
 
 router = APIRouter(prefix="/admin", tags=["admin"])
@@ -56,11 +56,20 @@ async def delete_item(item_id: int, user=Depends(get_current_user)):
     supabase.table("found_items").delete().eq("id", item_id).execute()
     return {"message": "Item deleted"}
 
-@router.patch("/items/{item_id}/mark-claimed")
-async def mark_item_claimed(item_id: int, user=Depends(get_current_user)):
-    check_role(user, ["security"])
-    supabase.table("found_items").update({"status": "claimed"}).eq("id", item_id).execute()
-    return {"message": "Item marked as claimed"}
+@router.patch("/items/{item_id}/mark-claimed/")
+async def mark_item_claimed(item_id: int, data: ClaimerInfo, user=Depends(get_current_user)):
+    try:
+        check_role(user, ["security"])
+        supabase.table("found_items").update({
+            "status": "claimed",
+            "claimer_name": data.claimer_name,
+            "claimer_email": data.claimer_email,
+            "updated_at": datetime.utcnow().isoformat()
+        }).eq("id", item_id).execute()
+        return {"message": "Item marked as claimed"}
+    except Exception as e:
+        print(f"Admin Mark Claimed Error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Claims management
 @router.get("/claims")

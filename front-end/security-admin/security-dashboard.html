@@ -71,20 +71,43 @@
       <a href="security-gallery.html" class="btn btn-secondary btn-sm">View Gallery</a>
     </div>
 
-    <div class="table-wrap">
+    <div class="table-wrap" style="margin-bottom: 40px;">
       <table>
         <thead>
           <tr>
             <th>Item #</th>
             <th>Item Name</th>
             <th>Location</th>
-            <th>Date</th>
+            <th>Date Reported</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody id="recent-items-table">
-          <!-- Dynamic Content -->
           <tr><td colspan="5" style="text-align:center; padding:20px;">Loading recent items...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- New Claims Log Section -->
+    <div class="section-head" style="margin-top:40px; border-top: 1px solid var(--border); padding-top: 30px;">
+      <h3>Claims Log (Handover Audit Trail)</h3>
+      <button class="btn btn-secondary btn-sm" onclick="window.print()">Print Log</button>
+    </div>
+    <div class="page-subtitle" style="margin-bottom: 15px;">A permanent record of students who have successfully recovered items.</div>
+
+    <div class="table-wrap">
+      <table id="claims-log-table">
+        <thead>
+          <tr>
+            <th>Date Claimed</th>
+            <th>Item Name</th>
+            <th>Claimed By</th>
+            <th>Student Email</th>
+            <th>Finder (Reporter)</th>
+          </tr>
+        </thead>
+        <tbody id="claims-log-table-body">
+          <tr><td colspan="5" style="text-align:center; padding:20px;">No handover records found.</td></tr>
         </tbody>
       </table>
     </div>

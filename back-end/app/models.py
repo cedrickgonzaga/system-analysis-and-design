@@ -36,5 +36,9 @@ class FoundItemCreate(BaseModel):
 class ClaimCreate(BaseModel):
     proof_image_url: str
 
+class ClaimerInfo(BaseModel):
+    claimer_name: str
+    claimer_email: Optional[str] = None
+
 class StatusUpdate(BaseModel):
     status: str    # we'll validate the allowed values in the endpoint logic

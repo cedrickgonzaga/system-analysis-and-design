@@ -253,13 +253,13 @@ async function loadSecurityDashboard() {
         
         const pending = allItems.filter(i => i.status === "pending");
         const displayedApproved = allItems.filter(i => i.status === "approved");
+        const claimedRecords = allItems.filter(i => i.status === "claimed");
         
         // Calculate Claimed This Month
         const currentMonth = new Date().getMonth();
         const currentYear = new Date().getFullYear();
-        const claimedThisMonth = allItems.filter(i => {
-            if (i.status !== "claimed") return false;
-            const d = new Date(i.created_at);
+        const claimedThisMonth = claimedRecords.filter(i => {
+            const d = new Date(i.updated_at || i.created_at);
             return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
         });
 
@@ -267,19 +267,46 @@ async function loadSecurityDashboard() {
         if (galleryCount) galleryCount.textContent = displayedApproved.length;
         if (claimedCount) claimedCount.textContent = claimedThisMonth.length;
 
+        // Table 1: Recent Active Items
         if (recentTable) {
             recentTable.innerHTML = "";
-            allItems.slice(0, 5).forEach(item => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>#${item.id}</td>
-                    <td><strong>${item.item_name}</strong></td>
-                    <td>${item.location}</td>
-                    <td>${formatDate(item.created_at)}</td>
-                    <td>${getStatusBadge(item.status)}</td>
-                `;
-                recentTable.appendChild(row);
-            });
+            const activeItems = allItems.filter(i => i.status !== "claimed").slice(0, 5);
+            if (activeItems.length === 0) {
+                recentTable.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px;">No active items.</td></tr>`;
+            } else {
+                activeItems.forEach(item => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>#${item.id}</td>
+                        <td><strong>${item.item_name}</strong></td>
+                        <td>${item.location}</td>
+                        <td>${formatDate(item.created_at)}</td>
+                        <td>${getStatusBadge(item.status)}</td>
+                    `;
+                    recentTable.appendChild(row);
+                });
+            }
+        }
+
+        // Table 2: Claims Log (Audit Trail)
+        const logTableBody = document.getElementById("claims-log-table-body");
+        if (logTableBody) {
+            logTableBody.innerHTML = "";
+            if (claimedRecords.length === 0) {
+                logTableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; padding:20px;">No handover records found.</td></tr>`;
+            } else {
+                claimedRecords.forEach(item => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${formatDate(item.updated_at || item.created_at)}</td>
+                        <td><strong>${item.item_name}</strong></td>
+                        <td style="color:var(--success); font-weight:600;">${item.claimer_name || "Unknown"}</td>
+                        <td>${item.claimer_email || "-"}</td>
+                        <td style="font-size: 0.8rem;">${item.poster ? item.poster.full_name : "Finder"}</td>
+                    `;
+                    logTableBody.appendChild(row);
+                });
+            }
         }
     } catch (err) {
         console.error(err);
@@ -363,6 +390,13 @@ async function loadSecurityGallery() {
                     <p>📍 ${item.location}</p>
                     <p style="margin-top:4px; font-size:0.75rem; color:var(--text-muted);">🕐 ${formatDate(item.created_at)}</p>
                     <p style="margin-top:4px;">${getStatusBadge(item.status)}</p>
+                    ${isClaimed ? `
+                        <div style="margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); font-size:0.8rem;">
+                            <div style="font-weight:600; color:var(--success);">Claimed By:</div>
+                            <div>${item.claimer_name || "Unknown"}</div>
+                            <div style="font-style:italic; opacity:0.8;">${item.claimer_email || ""}</div>
+                        </div>
+                    ` : ""}
                 </div>
                 <div class="gallery-actions">
                     <button class="btn btn-success btn-sm" ${isClaimed ? 'disabled' : ''} onclick="updateItemStatus(${item.id}, 'claimed')">
@@ -394,14 +428,59 @@ async function deleteItem(itemId) {
 }
 
 
-async function updateItemStatus(itemId, newStatus) {
+async function markMyItemClaimed(itemId, itemName) {
+    const claimerName = prompt(`Marking "${itemName}" as claimed.\n\nWho received the item? (Enter their name):`);
+    if (!claimerName) return;
+    
+    const claimerEmail = prompt("Enter their email (optional):");
+
     try {
-        const res = await fetchWithAuth(`${API_BASE}/admin/items/${itemId}/status`, {
+        const res = await fetchWithAuth(`${API_BASE}/items/${itemId}/mark-claimed/`, {
             method: "PATCH",
-            body: JSON.stringify({ status: newStatus })
+            body: JSON.stringify({
+                claimer_name: claimerName,
+                claimer_email: claimerEmail || ""
+            })
         });
 
-        if (!res.ok) throw new Error("Failed to update status");
+        if (!res.ok) {
+            const data = await res.json();
+            throw new Error(data.detail || "Failed to mark as claimed");
+        }
+
+        alert("Item successfully marked as claimed. It will no longer appear in the public gallery.");
+        loadLostFoundGallery();
+
+    } catch (err) {
+        console.error("Mark Claimed Error:", err);
+        alert("Error: " + (err.message || "Connection failed. Check if backend is running."));
+    }
+}
+
+
+async function updateItemStatus(itemId, newStatus) {
+    try {
+        // If marking as claimed, ask for claimer info
+        if (newStatus === 'claimed') {
+            const claimerName = prompt("Enter the Full Name of the student who claimed this item:");
+            if (!claimerName) return; // Cancel if no name
+            const claimerEmail = prompt("Enter their School Email (optional):");
+            
+            const res = await fetchWithAuth(`${API_BASE}/admin/items/${itemId}/mark-claimed/`, {
+                method: "PATCH",
+                body: JSON.stringify({ 
+                    claimer_name: claimerName, 
+                    claimer_email: claimerEmail || "" 
+                })
+            });
+            if (!res.ok) throw new Error("Failed to mark as claimed");
+        } else {
+            const res = await fetchWithAuth(`${API_BASE}/admin/items/${itemId}/status`, {
+                method: "PATCH",
+                body: JSON.stringify({ status: newStatus })
+            });
+            if (!res.ok) throw new Error("Failed to update status");
+        }
         
         // Refresh based on current page
         const path = window.location.pathname;
@@ -555,12 +634,15 @@ function renderGallery(items) {
     }
 
     galleryContainer.innerHTML = "";
+    const currentUserEmail = localStorage.getItem("email");
+
     items.forEach(item => {
         const card = document.createElement("div");
         card.className = "gallery-item card";
         
         const posterName = item.poster ? item.poster.full_name : "Unknown";
         const posterEmail = item.poster ? item.poster.school_email : "No email provided";
+        const isMyPost = currentUserEmail === posterEmail;
         
         // Determine possession text and icon
         const isAtSecurity = item.possession === "security";
@@ -573,8 +655,9 @@ function renderGallery(items) {
                 ${item.image_url ? `<img src="${item.image_url}" alt="${item.item_name}" style="width:100%; height:100%; object-fit:cover;">` : `<div style="display:flex; align-items:center; justify-content:center; height:100%; background:var(--bg-alt); color:var(--text-muted); font-size: 3rem;">📦</div>`}
             </div>
             <div class="gallery-content" style="padding-top: 14px;">
-                <div style="margin-bottom: 8px;">
+                <div style="margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
                     <span class="badge ${posClass}" style="font-size: 0.75rem;">${posIcon} ${posText}</span>
+                    ${isMyPost ? `<span class="badge badge-pending" style="font-size: 0.65rem;">Your Post</span>` : ""}
                 </div>
                 <div class="gallery-item-title" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 4px;">${item.item_name}</div>
                 <div class="gallery-item-meta" style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
@@ -584,14 +667,17 @@ function renderGallery(items) {
                 
                 <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.85rem;">
                     <div style="font-weight: 600; color: var(--text);">Finder Information:</div>
-                    <div style="color: var(--text-muted);">${posterName}</div>
+                    <div style="color: var(--text-muted);">${posterName} ${isMyPost ? "(You)" : ""}</div>
                     <a href="mailto:${posterEmail}" style="color:var(--accent); text-decoration:none;">${posterEmail}</a>
                 </div>
 
                 <div style="display:flex; gap:10px; margin-top:16px;">
-                    ${isAtSecurity ? 
-                        `<button class="btn btn-primary btn-full" onclick="startClaimProcess(${item.id}, '${item.item_name.replace(/'/g, "\\'")}')">Claim Now</button>` : 
-                        `<a href="mailto:${posterEmail}?subject=Found Item: ${item.item_name}" class="btn btn-secondary btn-full" style="text-decoration:none; text-align:center; display:flex; align-items:center; justify-content:center;">Contact Finder</a>`
+                    ${isMyPost ? 
+                        `<button class="btn btn-success btn-full" onclick="markMyItemClaimed(${item.id}, '${item.item_name.replace(/'/g, "\\'")}')">Mark as Claimed</button>` :
+                        (isAtSecurity ? 
+                            `<button class="btn btn-primary btn-full" onclick="startClaimProcess(${item.id}, '${item.item_name.replace(/'/g, "\\'")}')">Claim Now</button>` : 
+                            `<a href="mailto:${posterEmail}?subject=Found Item: ${item.item_name}" class="btn btn-secondary btn-full" style="text-decoration:none; text-align:center; display:flex; align-items:center; justify-content:center;">Contact Finder</a>`
+                        )
                     }
                 </div>
             </div>
