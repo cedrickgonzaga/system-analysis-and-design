@@ -60,13 +60,24 @@ async def delete_item(item_id: int, user=Depends(get_current_user)):
 async def mark_item_claimed(item_id: int, data: ClaimerInfo, user=Depends(get_current_user)):
     try:
         check_role(user, ["security"])
+        
+        # 1. Update the item status
         supabase.table("found_items").update({
             "status": "claimed",
             "claimer_name": data.claimer_name,
             "claimer_email": data.claimer_email,
             "updated_at": datetime.utcnow().isoformat()
         }).eq("id", item_id).execute()
-        return {"message": "Item marked as claimed"}
+
+        # 2. Insert into claims table to satisfy ERD and Audit requirements
+        supabase.table("claims").insert({
+            "item_id": item_id,
+            "claimant_id": user["id"], # The admin recording the claim
+            "status": "approved",
+            "created_at": datetime.utcnow().isoformat()
+        }).execute()
+
+        return {"message": "Item marked as claimed and record saved"}
     except Exception as e:
         print(f"Admin Mark Claimed Error: {e}")
         raise HTTPException(status_code=500, detail=str(e))

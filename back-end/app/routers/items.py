@@ -39,14 +39,23 @@ async def mark_my_item_claimed(item_id: int, data: ClaimerInfo, user=Depends(get
         if str(item.data["poster_id"]) != str(user.get("id")) and str(item.data["poster_id"]) != str(user.get("auth_id")):
             raise HTTPException(status_code=403, detail="You can only mark your own items as claimed")
 
+        # 2. Update the item status
         supabase.table("found_items").update({
             "status": "claimed",
             "claimer_name": data.claimer_name,
             "claimer_email": data.claimer_email,
             "updated_at": datetime.utcnow().isoformat()
         }).eq("id", item_id).execute()
+
+        # 3. Record the handover in the claims table
+        supabase.table("claims").insert({
+            "item_id": item_id,
+            "claimant_id": user.get("id") or user.get("auth_id"),
+            "status": "approved",
+            "created_at": datetime.utcnow().isoformat()
+        }).execute()
         
-        return {"message": "Item marked as claimed"}
+        return {"message": "Item marked as claimed and log recorded"}
     except Exception as e:
         print(f"Error marking item as claimed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
