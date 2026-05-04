@@ -416,14 +416,14 @@ async function loadSecurityGallery() {
 async function deleteItem(itemId) {
     if (!confirm("Are you sure you want to delete this post?")) return;
     try {
-        const res = await fetchWithAuth(`${API_BASE}/admin/items/${itemId}`, {
+        const res = await fetchWithAuth(`${API_BASE}/admin/items/${itemId}/`, {
             method: "DELETE"
         });
         if (!res.ok) throw new Error("Failed to delete item");
         loadSecurityGallery();
     } catch (err) {
-        console.error(err);
-        alert("Error deleting item.");
+        console.error("Delete Error:", err);
+        alert("Error deleting item. Check if backend is running.");
     }
 }
 
@@ -460,13 +460,16 @@ async function markMyItemClaimed(itemId, itemName) {
 
 async function updateItemStatus(itemId, newStatus) {
     try {
+        console.log(`Updating item ${itemId} status to: ${newStatus}`);
         // If marking as claimed, ask for claimer info
         if (newStatus === 'claimed') {
             const claimerName = prompt("Enter the Full Name of the student who claimed this item:");
             if (!claimerName) return; // Cancel if no name
             const claimerEmail = prompt("Enter their School Email (optional):");
             
-            const res = await fetchWithAuth(`${API_BASE}/admin/items/${itemId}/mark-claimed/`, {
+            const url = `${API_BASE}/admin/items/${itemId}/mark-claimed/`;
+            console.log("Fetching:", url);
+            const res = await fetchWithAuth(url, {
                 method: "PATCH",
                 body: JSON.stringify({ 
                     claimer_name: claimerName, 
@@ -475,7 +478,9 @@ async function updateItemStatus(itemId, newStatus) {
             });
             if (!res.ok) throw new Error("Failed to mark as claimed");
         } else {
-            const res = await fetchWithAuth(`${API_BASE}/admin/items/${itemId}/status`, {
+            const url = `${API_BASE}/admin/items/${itemId}/status/`;
+            console.log("Fetching:", url);
+            const res = await fetchWithAuth(url, {
                 method: "PATCH",
                 body: JSON.stringify({ status: newStatus })
             });
@@ -489,8 +494,8 @@ async function updateItemStatus(itemId, newStatus) {
         if (path.includes("security-dashboard.html")) loadSecurityDashboard();
 
     } catch (err) {
-        console.error(err);
-        alert("Error updating item status.");
+        console.error("Status Update Error:", err);
+        alert("Error: " + (err.message || "Connection failed. Check if backend is running."));
     }
 }
 

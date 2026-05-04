@@ -44,19 +44,31 @@ async def get_all_items(status: str = Query(None), user=Depends(get_current_user
     res = query.order("created_at", desc=True).execute()
     return res.data
 
+@router.patch("/items/{item_id}/status/", include_in_schema=False)
 @router.patch("/items/{item_id}/status")
 async def update_item_status(item_id: int, data: StatusUpdate, user=Depends(get_current_user)):
-    check_role(user, ["security"])
-    supabase.table("found_items").update({"status": data.status}).eq("id", item_id).execute()
-    return {"message": "Item status updated"}
+    try:
+        check_role(user, ["security"])
+        print(f"Updating item {item_id} to status: {data.status}")
+        res = supabase.table("found_items").update({"status": data.status}).eq("id", item_id).execute()
+        return {"message": "Item status updated"}
+    except Exception as e:
+        print(f"Status Update Error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
+@router.delete("/items/{item_id}/", include_in_schema=False)
 @router.delete("/items/{item_id}")
 async def delete_item(item_id: int, user=Depends(get_current_user)):
-    check_role(user, ["security"])
-    supabase.table("found_items").delete().eq("id", item_id).execute()
-    return {"message": "Item deleted"}
+    try:
+        check_role(user, ["security"])
+        supabase.table("found_items").delete().eq("id", item_id).execute()
+        return {"message": "Item deleted"}
+    except Exception as e:
+        print(f"Delete Error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
-@router.patch("/items/{item_id}/mark-claimed/")
+@router.patch("/items/{item_id}/mark-claimed/", include_in_schema=False)
+@router.patch("/items/{item_id}/mark-claimed")
 async def mark_item_claimed(item_id: int, data: ClaimerInfo, user=Depends(get_current_user)):
     try:
         check_role(user, ["security"])

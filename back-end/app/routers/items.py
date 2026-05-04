@@ -26,7 +26,8 @@ async def get_gallery(user=Depends(get_current_user)):
     res = supabase.table("found_items").select("*, poster:users(full_name, school_email, id, auth_id)").eq("status", "approved").order("created_at", desc=True).execute()
     return res.data
 
-@router.patch("/{item_id}/mark-claimed/")
+@router.patch("/{item_id}/mark-claimed/", include_in_schema=False)
+@router.patch("/{item_id}/mark-claimed")
 async def mark_my_item_claimed(item_id: int, data: ClaimerInfo, user=Depends(get_current_user)):
     try:
         # 1. Verify this user is the one who posted the item
