@@ -51,26 +51,6 @@
       </div>
     </div>
 
-    <div class="grid-2" style="max-width:600px;">
-      <a href="security-pending-posts.html" class="choice-card" style="text-decoration:none; color:inherit;">
-        <div class="choice-icon">⏳</div>
-        <div class="choice-title">Review Pending Posts</div>
-        <div class="choice-desc">Approve or reject student-submitted found item reports.</div>
-        <button class="btn btn-primary btn-sm" style="margin-top:8px;">Go</button>
-      </a>
-      <a href="security-gallery.html" class="choice-card" style="text-decoration:none; color:inherit;">
-        <div class="choice-icon">🖼</div>
-        <div class="choice-title">Found Item Gallery</div>
-        <div class="choice-desc">View all approved items, mark as claimed, or delete posts.</div>
-        <button class="btn btn-primary btn-sm" style="margin-top:8px;">Go</button>
-      </a>
-    </div>
-
-    <div class="section-head" style="margin-top:40px;">
-      <h3>Recent Found Items</h3>
-      <a href="security-gallery.html" class="btn btn-secondary btn-sm">View Gallery</a>
-    </div>
-
     <div class="table-wrap" style="margin-bottom: 40px;">
       <table>
         <thead>
@@ -83,7 +63,9 @@
           </tr>
         </thead>
         <tbody id="recent-items-table">
-          <tr><td colspan="5" style="text-align:center; padding:20px;">Loading recent items...</td></tr>
+          <tr>
+            <td colspan="5" style="text-align:center; padding:20px;">Loading recent items...</td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -93,7 +75,8 @@
       <h3>Claims Log (Handover Audit Trail)</h3>
       <button class="btn btn-secondary btn-sm" onclick="window.print()">Print Log</button>
     </div>
-    <div class="page-subtitle" style="margin-bottom: 15px;">A permanent record of students who have successfully recovered items.</div>
+    <div class="page-subtitle" style="margin-bottom: 15px;">A permanent record of students who have successfully
+      recovered items.</div>
 
     <div class="table-wrap">
       <table id="claims-log-table">
@@ -107,7 +90,9 @@
           </tr>
         </thead>
         <tbody id="claims-log-table-body">
-          <tr><td colspan="5" style="text-align:center; padding:20px;">No handover records found.</td></tr>
+          <tr>
+            <td colspan="5" style="text-align:center; padding:20px;">No handover records found.</td>
+          </tr>
         </tbody>
       </table>
     </div>
